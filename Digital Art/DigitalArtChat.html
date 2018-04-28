@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Digital Art Chatroom</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel='stylesheet' type='text/css' href='..\Other\stylesheet.css'/>
+	
+	<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+	<script>
+		// Initialize Firebase
+		var config = {
+			apiKey: "AIzaSyBz4bxHeP_ur210yeUmJXy0r3PEMjNBki4",
+			authDomain: "creativeme-9de80.firebaseapp.com",
+			databaseURL: "https://creativeme-9de80.firebaseio.com",
+			projectId: "creativeme-9de80",
+			storageBucket: "creativeme-9de80.appspot.com",
+			messagingSenderId: "401824634672"
+		};
+		firebase.initializeApp(config);
+		
+	</script>
+	
+	<style>
+	#divChat {
+		background-color: white; 
+		width: 1000px;
+		height: 435px;
+		margin: 0 auto;
+		padding: 10px 20px;
+		border-style: solid;
+		border-color: #D3D3D3;
+		overflow: auto;
+		font-family: calibri;
+		font-size: 18px;
+	}
+	
+	</style>
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="60">
+
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div>
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>                        
+				</button>
+				<a class="navbar-brand" href="..\Other\HomePage.html">CREATIVE ME</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="..\Other\HomePage.html">Home</a></li>
+					<li><a href="..\FilmVideo\FilmPage.html">Film/Video</a></li>
+					<li><a href="..\Art\ArtPage.html">Art</a></li>
+					<li><a href="..\Digital Art\DigitalArtPage.html">Digital Art</a></li>
+					<li><a href="..\Writing\WritingPage.html">Writing</a></li>
+					<li><a href="..\Miscellaneous\MiscPage.html">Miscellaneous</a></li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">MORE<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="..\Professional\ProfessionalPage.html">Connect to Professional</a></li>
+							<li><a href="..\Other\PostPage.html">Post Creativity</a></li>
+							<li><a href="..\Other\CollegePage.html">College!</a></li>
+							<li><a href="..\Professional\MessagePage.html">Messages</a></li>
+						</ul>
+					</li>
+					<li><a href="..\Other\AccountPage.html" style="border: 2px solid #e7e7e7;">Create Account</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
+					<div id="divLogin" class="form-group" style="margin: 10px 20px 10px 0; float: left;">
+						<input class="form-control" id="txtEmailLogin" placeholder="Email" type="text" 
+															style="width: 150px; display: table-cell; height: 100%; vertical-align: middle;">
+						<input class="form-control" id="txtPasswordLogin" placeholder="Password" type="password" 
+															style="width: 150px; display: table-cell; height: 100%; vertical-align: middle;">
+						<button class="btn" id="btnLogin" onclick="login()" style="width: 80px; display: table-cell; 
+																			padding: 5px; vertical-align: middle;">Login</button>
+					</div>
+					<div id="divLogout" class="form-group" style="margin: 5px 20px 5px 0; float: left;">
+						<button class="btn" id="btnLogout" onclick="logout()">Logout</button>
+						<a href="..\Professional\ProfessionalProfile.html" id="aUserProfile" style="color: white; float: right; margin: 10px 10px;"></a>
+					</div>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	
+	<div class="container">
+	<h1 id="chatHeader" style="font-family: cambria; text-align: center;">Digital Art</h1>
+	
+	<div id="divChat"></div>
+	<div id="" style="text-align: center; margin: 20px;">
+		<input type="text" id="message" style="width: 900px">
+		<button id="btnChat" onclick="submitChatText()">Submit</button>
+	</div>
+	</div>
+	
+	<footer class="text-center">
+		<a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP">
+			<span class="glyphicon glyphicon-chevron-up"></span>
+		</a><br><br>
+  
+		<div class="row">
+			<div class="col-sm-4">
+				<p><span class="glyphicon glyphicon-map-marker"></span>New York, US</p>
+			</div>
+			<div class="col-sm-4">
+				<p><span class="glyphicon glyphicon-phone"></span>Phone: +00 1515151515</p>
+			</div>
+			<div class="col-sm-4">
+				<p><span class="glyphicon glyphicon-envelope"></span>Email: CreativeMe@gmail.com</p>
+			</div>
+		</div>
+	</footer>
+
+	<script src="..\Other\functions.js"></script>
+	<script src="..\Other\chatFunctions.js"></script>
+</body>
+</html>

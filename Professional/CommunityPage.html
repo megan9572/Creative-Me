@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Community Page</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel='stylesheet' type='text/css' href='..\Other\stylesheet.css'/>
+	
+	<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+	<script>
+		// Initialize Firebase
+		var config = {
+			apiKey: "AIzaSyBz4bxHeP_ur210yeUmJXy0r3PEMjNBki4",
+			authDomain: "creativeme-9de80.firebaseapp.com",
+			databaseURL: "https://creativeme-9de80.firebaseio.com",
+			projectId: "creativeme-9de80",
+			storageBucket: "creativeme-9de80.appspot.com",
+			messagingSenderId: "401824634672"
+		};
+		firebase.initializeApp(config);
+		
+		firebase.auth().onAuthStateChanged(function(user) {
+		
+			var user = firebase.auth().currentUser;
+			var userDbRef = firebase.database().ref("users/" + user.uid);
+			
+			var chatSort = (document.getElementById("chatHeader").innerHTML) + "_chatroom";
+			firebase.database().ref(chatSort).on('value', function(snapshot){
+				var data = snapshot.val();
+				build = "";
+				for(var key in data){
+					build += "<p style='display: inline;'>"  + data[key].question +
+					"<p style='color: grey; float: right; font-size: 10px;'>" + data[key].time + "</p></p>";
+				}
+			document.getElementById("divChat").innerHTML = build;
+			});
+		
+			
+			//display description on profile
+			userDbRef.child("community_page/" + "question").on("value", function(snapshot) {
+				document.getElementById("pDescriptionQuestion").innerHTML += snapshot.val();
+			});
+		});
+	</script>
+	
+	<style>
+	img{
+		width:80px;
+		height:80px;
+	}
+	table {
+		font-family: arial, sans-serif;
+		border-collapse: collapse;
+		width: 1050px;
+	}
+	td, th {
+		border: 1px solid #dddddd;
+		text-align: left;
+		padding: 10px;
+	}
+	tr:nth-child(even) {
+		background-color: #dddddd;
+	}
+	tr:nth-child(odd) {
+		background-color: white;
+	}
+	#moveleft{
+		padding-top:102px;
+		padding-right:23px;
+		float: right;
+		width:5px;
+		height:10px;
+	}
+
+	</style>
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="60">
+
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div>
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>                        
+				</button>
+				<a class="navbar-brand" href="..\Other\HomePage.html">CREATIVE ME</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="..\Other\HomePage.html">Home</a></li>
+					<li><a href="..\FilmVideo\FilmPage.html">Film/Video</a></li>
+					<li><a href="..\Art\ArtPage.html">Art</a></li>
+					<li><a href="..\Digital Art\DigitalArtPage.html">Digital Art</a></li>
+					<li><a href="..\Writing\WritingPage.html">Writing</a></li>
+					<li><a href="..\Miscellaneous\MiscPage.html">Miscellaneous</a></li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">MORE<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="..\Professional\ProfessionalPage.html">Connect to Professional</a></li>
+							<li><a href="..\Other\PostPage.html">Post Creativity</a></li>
+							<li><a href="..\Other\CollegePage.html">College!</a></li>
+							<li><a href="..\Professional\MessagePage.html">Messages</a></li>
+						</ul>
+					</li>
+					<li><a href="..\Other\AccountPage.html" style="border: 2px solid #e7e7e7;">Create Account</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
+					<div id="divLogin" class="form-group" style="margin: 10px 20px 10px 0; float: left;">
+						<input class="form-control" id="txtEmailLogin" placeholder="Email" type="text" 
+															style="width: 150px; display: table-cell; height: 100%; vertical-align: middle;">
+						<input class="form-control" id="txtPasswordLogin" placeholder="Password" type="password" 
+															style="width: 150px; display: table-cell; height: 100%; vertical-align: middle;">
+						<button class="btn" id="btnLogin" onclick="login()" style="width: 80px; display: table-cell; 
+																			padding: 5px; vertical-align: middle;">Login</button>
+					</div>
+					<div id="divLogout" class="form-group" style="margin: 5px 20px 5px 0; float: left;">
+						<button class="btn" id="btnLogout" onclick="logout()">Logout</button>
+						<a href="..\Professional\ProfessionalProfile.html" id="aUserProfile" style="color: white; float: right; margin: 10px 10px;"></a>
+					</div>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	
+	<div class="container">
+		THIS PAGE IS UNDERDEVELOPMENT
+	</div>
+	
+	<!-- <div id="divDisplayQuestion"> 
+		<input id="bDiscriptionEdit" onclick="editQuestion()" placeholder="Enter Your Question" style="border: none;">
+		</input>
+	</div> 
+	<div id="divEditQuestion" style="display: none;">
+		<textarea id="txtaQuestion" rows="4" cols="90"></textarea>
+		<button id="bDiscriptionDone" onclick="submitQuestionText()">Done</button>
+	</div>
+	
+	<div class="container" style="margin: 50px 0;">
+		<div class="col-sm-2">
+			<table style= "width: 700px">
+				<tr>
+					<th colspan="2" > <h1 id="chatHeader" style="font-family: cambria; text-align: center;">Question</h1> </th>
+				</tr>
+				<tr>
+					<td> <p id="userMessage"> </p>
+						 </td>
+						 <td>
+						 <p id="pDescriptionQuestion" style="font-size: 15px;"></p>
+						 <div id="divChat"> </div>
+						 
+						 <input type="text" id="Question1" placeholder="Enter Reply" style="width: 900px">
+		
+							<button onclick="submitChatQueText()">Submit</button>
+						 
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div id="otherUsers" > </div>
+						<td> 
+						
+					</td>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div id="otherUsers" > </div>
+						<td></td>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div id="otherUsers" > </div>
+						<td></td>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<td>	</td>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<td>	</td>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<td>	</td>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<td>	</td>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<td>	</td>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<td>	</td>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<td>	</td>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<td>	</td>
+					</td>
+				</tr>
+			</table>	
+		</div>
+	</div> -->
+   
+	<footer class="text-center">
+		<a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP">
+			<span class="glyphicon glyphicon-chevron-up"></span>
+		</a><br><br>
+  
+		<div class="row">
+			<div class="col-sm-4">
+				<p><span class="glyphicon glyphicon-map-marker"></span>New York, US</p>
+			</div>
+			<div class="col-sm-4">
+				<p><span class="glyphicon glyphicon-phone"></span>Phone: +00 1515151515</p>
+			</div>
+			<div class="col-sm-4">
+				<p><span class="glyphicon glyphicon-envelope"></span>Email: CreativeMe@gmail.com</p>
+			</div>
+		</div>
+	</footer>
+	
+	<script src="..\Other\functions.js"></script>
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Art Page</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel='stylesheet' type='text/css' href='..\Other\stylesheet.css'/>
+	
+	<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+	<script>
+		// Initialize Firebase
+		var config = {
+			apiKey: "AIzaSyBz4bxHeP_ur210yeUmJXy0r3PEMjNBki4",
+			authDomain: "creativeme-9de80.firebaseapp.com",
+			databaseURL: "https://creativeme-9de80.firebaseio.com",
+			projectId: "creativeme-9de80",
+			storageBucket: "creativeme-9de80.appspot.com",
+			messagingSenderId: "401824634672"
+		};
+		firebase.initializeApp(config);
+		
+	</script>
+	<script src="..\Other\functions.js"></script>
+	
+	<style>
+	.bg-1 { 
+		height: 550px;
+		background-color: #eebf91;
+		border-style: solid;
+	}
+	.work {
+		background-color: #474e5d;
+		float: left;
+		margin: 20px;
+		border-width: 1px;
+	}
+	.work a {
+		color: #d5d5d5;
+		font-family: Montserrat, sans-serif;
+		border: 0;
+		letter-spacing: 2px;
+		opacity: 0.9;
+		margin: 0px 10px;
+		text-decoration: none;
+	}
+	.work a:hover {
+		color: white;
+	}
+	.imgHere {
+		padding: 20px 40px;
+		height: 100%;
+	}
+	#pInfo {
+		width: 100%;
+		float: left;
+		color: black;
+	}
+	.exProjectDiv {
+		height: 300px;
+		padding: 0px;
+		text-align: center;
+	}
+	.thumbnail {
+		height: 300px;
+		width: 100%;
+		display: table-cell;
+		vertical-align: middle;
+		background-color: grey;
+		border-radius: 0px;
+		cursor: pointer;
+	}
+	.thumbnail img {
+		object-fit: contain;
+		max-height: 100%;
+		width: 100%;
+	}
+	.carousel-control.right, .carousel-control.left {
+		color: white;
+	}
+	.item {
+		width: 100%;
+		padding: 50px 150px;
+		height: 450px;
+	}
+	#linkChatroom {
+		background-color: #FF7F50;
+		color: #F8F8FF;
+		padding: 8px;
+	}
+	#linkChatroom:hover {
+		text-decoration: none;
+		color: white;
+		background-color: #D2691E;
+	}
+	.modal {
+		display: none;
+		position: fixed;
+		z-index: 1;
+		padding-top: 100px;
+		width: 100vw;
+		height: 100vh;
+		background-color: rgb(0,0,0);
+		background-color: rgba(0,0,0,0.4);
+	}
+	.modal-content {
+		background-color: #fefefe;
+		margin: auto;
+		padding: 10px;
+		border: 1px solid #888;
+		width: 80vw;
+		height: 70vh;
+	}
+	#modalProjectDiv {
+		width: 400px;
+		height: 400px;
+		background-color: grey;
+		float: left;
+		display:flex;
+		align-items:center;
+		justify-content:center;
+	}
+	#modalProjectDiv img {
+		object-fit: contain;
+		max-height: 100%;
+		max-width: 100%;
+	}
+	#modalComments {
+		background-color: #F8F8FF;
+		height: 400px;
+		width: 400px;
+		margin: 0 20px;
+		padding: 10px;
+		border-style: solid;
+		border-color: #D3D3D3;
+		overflow: auto;
+		float: left;
+		font-family: calibri;
+		font-size: 14px;
+	}
+	
+	</style>
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="60" onload="displayEx()" id="Art">
+
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div>
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>                        
+				</button>
+				<a class="navbar-brand" href="..\Other\HomePage.html">CREATIVE ME</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="..\Other\HomePage.html">Home</a></li>
+					<li><a href="..\FilmVideo\FilmPage.html">Film/Video</a></li>
+					<li><a href="..\Art\ArtPage.html">Art</a></li>
+					<li><a href="..\Digital Art\DigitalArtPage.html">Digital Art</a></li>
+					<li><a href="..\Writing\WritingPage.html">Writing</a></li>
+					<li><a href="..\Miscellaneous\MiscPage.html">Miscellaneous</a></li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">MORE<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="..\Professional\ProfessionalPage.html">Connect to Professional</a></li>
+							<li><a href="..\Other\PostPage.html">Post Creativity</a></li>
+							<li><a href="..\Other\CollegePage.html">College!</a></li>
+							<li><a href="..\Professional\MessagePage.html">Messages</a></li>
+						</ul>
+					</li>
+					<li><a href="..\Other\AccountPage.html" style="border: 2px solid #e7e7e7;">Create Account</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
+					<div id="divLogin" class="form-group" style="margin: 10px 20px 10px 0; float: left;">
+						<input class="form-control" id="txtEmailLogin" placeholder="Email" type="text" 
+															style="width: 150px; display: table-cell; height: 100%; vertical-align: middle;">
+						<input class="form-control" id="txtPasswordLogin" placeholder="Password" type="password" 
+															style="width: 150px; display: table-cell; height: 100%; vertical-align: middle;">
+						<button class="btn" id="btnLogin" onclick="login()" style="width: 80px; display: table-cell; 
+																			padding: 5px; vertical-align: middle;">Login</button>
+					</div>
+					<div id="divLogout" class="form-group" style="margin: 5px 20px 5px 0; float: left;">
+						<button class="btn" id="btnLogout" onclick="logout()">Logout</button>
+						<a href="..\Professional\ProfessionalProfile.html" id="aUserProfile" style="color: white; float: right; margin: 10px 10px;"></a>
+					</div>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container bg-1">
+		<div class="imgHere col-sm-3">
+			<img src="Images\VanGoghStarryNight.jpg" style="width: 300px;">
+		</div>
+		<div class="col-sm-9">
+			<div class="work"><a href="..\Professional\CommunityPage.html">Community</a></div>
+			<p id="pInfo">
+				The visual arts are art forms such as ceramics, drawing, painting, sculpture, printmaking, design, crafts, photography, video, 
+				filmmaking, and architecture. Many artistic disciplines (performing arts, conceptual art, textile arts) involve aspects of the 
+				visual arts as well as arts of other types. Also included within the visual arts are the applied arts such as industrial 
+				design, graphic design, fashion design, interior design and decorative art. The increasing tendency to privilege painting, and 
+				to a lesser degree sculpture, above other arts has been a feature of Western art as well as East Asian art. In both regions painting 
+				has been seen as relying to the highest degree on the imagination of the artist, and the furthest removed from manual labour – in 
+				Chinese painting the most highly valued styles were those of "scholar-painting", at least in theory practiced by gentleman amateurs. 
+				The Western hierarchy of genres reflected similar attitudes. *This information is for temporary use.*
+			</p>
+		</div>
+		<div style="width: 100%;">
+			<a href="..\Art\ArtChat.html" id="linkChatroom">Join our chatroom</a>
+		</div>
+	</div>
+	
+	<div class="container" style="padding: 0px 0px;">
+		<div id="myCarousel" class="carousel slide" data-ride="carousel">
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1"></li>
+			</ol>
+			<div id="projectCarousel" class="carousel-inner text-center">
+				<div class="item active">
+					<div class="exProjectDiv col-sm-2">
+						<div class="thumbnail" >
+						</div>
+						<h4 class="projectTitle">SAMPLE</h4>
+					</div>
+					<div class="exProjectDiv col-sm-2">
+						<div class="thumbnail">
+						</div>
+						<h4 class="projectTitle">SAMPLE</h4>
+					</div>
+					<div class="exProjectDiv col-sm-2">
+						<div class="thumbnail">
+						</div>
+						<h4 class="projectTitle">SAMPLE</h4>
+					</div>
+					<div class="exProjectDiv col-sm-2">
+						<div class="thumbnail">
+						</div>
+						<h4 class="projectTitle">SAMPLE</h4>
+					</div>
+					<div class="exProjectDiv col-sm-2">
+						<div class="thumbnail">
+						</div>
+						<h4 class="projectTitle">SAMPLE</h4>
+					</div>
+					<div class="exProjectDiv col-sm-2">
+						<div class="thumbnail">
+						</div>
+						<h4 class="projectTitle">SAMPLE</h4>
+					</div>
+				</div>
+				<div class="item">
+					<div class="exProjectDiv col-sm-2">
+						<div class="thumbnail">
+						</div>
+						<h4 class="projectTitle">SAMPLE</h4>
+					</div>
+					<div class="exProjectDiv col-sm-2">
+						<div class="thumbnail">
+						</div>
+						<h4 class="projectTitle">SAMPLE</h4>
+					</div>
+					<div class="exProjectDiv col-sm-2">
+						<div class="thumbnail">
+						</div>
+						<h4 class="projectTitle">SAMPLE</h4>
+					</div>
+					<div class="exProjectDiv col-sm-2">
+						<div class="thumbnail">
+						</div>
+						<h4 class="projectTitle">SAMPLE</h4>
+					</div>
+					<div class="exProjectDiv col-sm-2">
+						<div class="thumbnail">
+						</div>
+						<h4 class="projectTitle">SAMPLE</h4>
+					</div>
+					<div class="exProjectDiv col-sm-2">
+						<div class="thumbnail">
+						</div>
+						<h4 class="projectTitle">SAMPLE</h4>
+					</div>
+				</div>
+			</div>
+			<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>
+		<div id="myModal" class="modal w3-modal-content w3-animate-opacity">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" 
+						onclick="document.getElementById('myModal').style.display = 'none'";>&times;</button>
+					<h4 id="modalProjectTitle"></h4>
+				</div>
+				<div class="modal-body">
+					<div id="modalProjectDiv">
+					</div>
+					<div id="modalComments">
+					</div>
+					<div style="float: right; width: 300px; height: 400px; border: 2px solid #DCDCDC; padding: 8px; background-color: white;">
+						<button id="likeBtn" onclick="likeThis()" style="float: left; margin-right: 10px;">&hearts;</button> 
+						<p id="displayLikes" style="font-size: 18px;">#</p><br>
+						<p id="projectDescription"></p><br>
+						<textarea id="commentTxt" style="width: 100%;"></textarea>
+						<button id="btnComment" onclick="submitComment()">Submit</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<footer class="text-center">
+		<a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP">
+			<span class="glyphicon glyphicon-chevron-up"></span>
+		</a><br><br>
+  
+		<div class="row">
+			<div class="col-sm-4">
+				<p><span class="glyphicon glyphicon-map-marker"></span>New York, US</p>
+			</div>
+			<div class="col-sm-4">
+				<p><span class="glyphicon glyphicon-phone"></span>Phone: +00 1515151515</p>
+			</div>
+			<div class="col-sm-4">
+				<p><span class="glyphicon glyphicon-envelope"></span>Email: CreativeMe@gmail.com</p>
+			</div>
+		</div>
+	</footer>
+
+	<script src="..\Other\functions.js"></script>
+	<script src="..\Other\modalFunctions.js"></script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+body {
+	font: 400 15px/1.8 Lato, sans-serif;
+	background-color: #d2d2f9;
+}
+.container {
+	padding-top: 50px;
+	width: 100%;
+	border-style: solid;
+	border-color: white;
+}
+.nav-tabs li a {
+	color: #777;
+}
+.navbar {
+	font-family: Montserrat, sans-serif;
+	margin-bottom: 0;
+	background-color: #2d2d30;
+	border: 0;
+	font-size: 11px !important;
+	letter-spacing: 2px;
+	opacity: 0.9;
+}
+.navbar li a, .navbar .navbar-brand { 
+	color: #d5d5d5 !important;
+}
+.navbar-nav li a:hover {
+	color: #fff !important;
+}
+.navbar-nav li.active a {
+	color: #fff !important;
+	background-color: #29292c !important;
+}
+.navbar-default .navbar-toggle {
+	border-color: transparent;
+}
+.dropdown-menu li a {
+	color: #000 !important;
+}
+.dropdown-menu li a:hover {
+	background-color: red !important;
+}
+footer {
+	background-color: #2d2d30;
+	color: #f5f5f5;
+	padding: 32px;  
+}
+footer a {
+	color: #f5f5f5;
+}
+footer a:hover {
+	color: #777;
+	text-decoration: none;
+}
+.btn {
+	padding: 10px 20px;
+	background-color: #333;
+	color: #f1f1f1;
+	border-radius: 0;
+	transition: .2s;
+}
+.btn:hover, .btn:focus {
+	border: 1px solid grey;
+	background-color: #fff;
+	color: #000;
+}
+.form-control {
+	border-radius: 0;
+}

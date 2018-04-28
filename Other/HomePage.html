@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home Page</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel='stylesheet' type='text/css' href='..\Other\stylesheet.css'/>
+	
+	<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+	<script>
+		// Initialize Firebase
+		var config = {
+			apiKey: "AIzaSyBz4bxHeP_ur210yeUmJXy0r3PEMjNBki4",
+			authDomain: "creativeme-9de80.firebaseapp.com",
+			databaseURL: "https://creativeme-9de80.firebaseio.com",
+			projectId: "creativeme-9de80",
+			storageBucket: "creativeme-9de80.appspot.com",
+			messagingSenderId: "401824634672"
+		};
+		firebase.initializeApp(config);
+		
+	</script>
+	
+	
+	<style>
+	.container {
+		width: 100%;
+		padding: 80px 120px;
+		border-style: none !important;
+		border-color: none !important;
+	}
+	.infoBox {
+		background: white;
+		color: #000000;
+		box-shadow: 5px 0 5px 5px grey;
+		padding: 20px;
+		height: 200px;
+	}
+	.list-group-item:first-child {
+		border-top-right-radius: 0;
+		border-top-left-radius: 0;
+	}
+	.list-group-item:last-child {
+		border-bottom-right-radius: 0;
+		border-bottom-left-radius: 0;
+	}
+	.infoEvents{
+		padding: 0 0 15px 0;
+		border: none;
+		border-radius: 0;
+	}
+	.infoEvents p {
+		margin-top: 15px;
+		color: #555;
+	}
+	.thumbnail {
+		height: 300px;
+		width: 100%;
+		display: table-cell;
+		vertical-align: middle;
+		background-color: grey;
+		border-radius: 0px;
+		cursor: pointer;
+	}
+	.thumbnail img, .thumbnail video, .thumbnail embed{
+		object-fit: contain;
+		max-height: 100%;
+		max-width: 100%;
+	}
+	.modal {
+		display: none;
+		position: fixed;
+		z-index: 1;
+		padding-top: 100px;
+		width: 100vw;
+		height: 100vh;
+		background-color: rgb(0,0,0);
+		background-color: rgba(0,0,0,0.4);
+	}
+	.modal-content {
+		background-color: #fefefe;
+		margin: auto;
+		padding: 10px;
+		border: 1px solid #888;
+		width: 80vw;
+		height: 70vh;
+	}
+	#modalProjectDiv {
+		width: 400px;
+		height: 400px;
+		background-color: grey;
+		float: left;
+		display:flex;
+		align-items:center;
+		justify-content:center;
+	}
+	#modalProjectDiv img {
+		object-fit: contain;
+		max-height: 100%;
+		max-width: 100%;
+	}
+	#modalComments {
+		background-color: #F8F8FF;
+		height: 400px;
+		width: 400px;
+		margin: 0 20px;
+		padding: 10px;
+		border-style: solid;
+		border-color: #D3D3D3;
+		overflow: auto;
+		float: left;
+		font-family: calibri;
+		font-size: 14px;
+	}
+	
+	</style>
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60" onload="displayEx()">
+
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div>
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>                        
+				</button>
+				<a class="navbar-brand" href="..\Other\HomePage.html">CREATIVE ME</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="..\Other\HomePage.html">Home</a></li>
+					<li><a href="..\FilmVideo\FilmPage.html">Film/Video</a></li>
+					<li><a href="..\Art\ArtPage.html">Art</a></li>
+					<li><a href="..\Digital Art\DigitalArtPage.html">Digital Art</a></li>
+					<li><a href="..\Writing\WritingPage.html">Writing</a></li>
+					<li><a href="..\Miscellaneous\MiscPage.html">Miscellaneous</a></li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">MORE<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="..\Professional\ProfessionalPage.html">Connect to Professional</a></li>
+							<li><a href="..\Other\PostPage.html">Post Creativity</a></li>
+							<li><a href="..\Other\CollegePage.html">College!</a></li>
+							<li><a href="..\Professional\MessagePage.html">Messages</a></li>
+						</ul>
+					</li>
+					<li><a href="..\Other\AccountPage.html" style="border: 2px solid #e7e7e7;">Create Account</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
+					<div id="divLogin" class="form-group" style="margin: 10px 20px 10px 0; float: left;">
+						<input class="form-control" id="txtEmailLogin" placeholder="Email" type="text" 
+															style="width: 150px; display: table-cell; height: 100%; vertical-align: middle;">
+						<input class="form-control" id="txtPasswordLogin" placeholder="Password" type="password" 
+															style="width: 150px; display: table-cell; height: 100%; vertical-align: middle;">
+						<button class="btn" id="btnLogin" onclick="login()" style="width: 80px; display: table-cell; 
+																			padding: 5px; vertical-align: middle;">Login</button>
+					</div>
+					<div id="divLogout" class="form-group" style="margin: 5px 20px 5px 0; float: left;">
+						<button class="btn" id="btnLogout" onclick="logout()">Logout</button>
+						<a href="..\Professional\ProfessionalProfile.html" id="aUserProfile" style="color: white; float: right; margin: 10px 10px;"></a>
+					</div>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	
+	<div class="container" style="background-color: #2d2d30;">
+		<h1 class="text-center" style="color: #ffffff; letter-spacing: 10px;">Creative Me</h1>
+		<p class="text-center" style="font-style: italic;">Show your creativity by joining the community.</p><br/>
+		<div>
+			<div class="input-group-btn" style="text-align: center;">
+				<a href="..\Other\AccountPage.html" class="btn" style="border: solid white">Create Account</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- <div class="container text-center" style="background-color: white;">
+		<h3 style="letter-spacing: 10px;">POPULAR PROJECTS</h3><br>
+		<div class="row">
+			<div class="exProjectDiv col-sm-4">
+				<div class="thumbnail" >
+				</div>
+				<h4 class="projectTitle">SAMPLE</h4>
+			</div>
+			<div class="exProjectDiv col-sm-4">
+				<div class="thumbnail" >
+				</div>
+				<h4 class="projectTitle">SAMPLE</h4>
+			</div>
+			<div class="exProjectDiv col-sm-4">
+				<div class="thumbnail" >
+				</div>
+				<h4 class="projectTitle">SAMPLE</h4>
+			</div>
+		</div>
+		<div id="myModal" class="modal w3-modal-content w3-animate-opacity">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" 
+						onclick="document.getElementById('myModal').style.display = 'none'";>&times;</button>
+					<h4 id="modalProjectTitle"></h4>
+				</div>
+				<div class="modal-body">
+					<div id="modalProjectDiv">
+					</div>
+					<div id="modalComments">
+					</div>
+					<div style="float: right; width: 300px; height: 400px; border: 2px solid #DCDCDC; padding: 8px; background-color: white;">
+						<button id="likeBtn" onclick="likeThis()" style="float: left; margin-right: 10px;">&hearts;</button> 
+						<p id="displayLikes" style="font-size: 18px;">#</p><br>
+						<p id="projectDescription"></p><br>
+						<textarea id="commentTxt" style="width: 100%;"></textarea>
+						<button id="btnComment" onclick="submitComment()">Submit</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	 -->
+
+	<div class="container text-center">
+		<h3 style="letter-spacing: 10px; color: #111;">BRING OUT THE CREATIVE YOU</h3>
+		<p><em>Creativity is key to success!</em></p>
+		<div class="row">
+			<div class="col-sm-4">
+				<p class="infoBox text-center">Professional <br> <br> 
+				graduates from ###+ Universities/colleges has partnered with Creative Me to offer guidance and tips on 
+				expanding the creative minds of users around the world.</p><br>
+			</div>
+			<div class="col-sm-4">
+				<p class="infoBox text-center"> Explore Ideas <br> <br> 
+				On a creative block? Come join us on our page where you can find millions of new and fresh ideas that 
+				offers a variety of background info for your next project.</p><br>
+			</div>
+			<div class="infoBox col-sm-4">
+				<p class="text-center"> Discussion <br> <br> 
+				Discuss or share your ideas and questions on our discussion page, where users from all over the world can 
+				interact with each other and share their creative styles.</p><br>
+			</div>
+		</div>
+	</div>
+  
+	<div class="container text-center" style="background: #2d2d30; padding: 80px 80px 80px 80px;">
+		<h3 class="text-center" style="letter-spacing: 10px; color: white;">CHECK OUT WHAT'S COMING SOON</h3>
+		<p class="text-center"><em>Have nothing to do? Check out these events.</em></p>
+		<div class="col-sm-4">
+			<div class="infoEvents">
+				<img src="Images\4.jpg" alt="Museum Exibits" width="400" height="300">
+				<p><strong>Information on Museum Exibits</strong></p>
+				<p>Friday 27 November 2015</p>
+				<button class="btn" data-toggle="modal" data-target="#myModal">More Info</button>
+			</div>
+		</div>
+		<div class="col-sm-4">
+			<div class="infoEvents">
+				<img src="Images\5.jpg" alt="Concerts" width="400" height="300">
+				<p><strong>Information on Concerts</strong></p>
+				<p>Saturday 28 November 2015</p>
+				<button class="btn" data-toggle="modal" data-target="#myModal">More Info</button>
+			</div>
+		</div>
+		<div class="col-sm-4">
+			<div class="infoEvents">
+				<img src="Images\6.jpg" alt="Fan Signing" width="400" height="300">
+				<p><strong>Information on Fan Signing</strong></p>
+				<p>Sunday 29 November 2015</p>
+				<button class="btn" data-toggle="modal" data-target="#myModal">More Info</button>
+			</div>
+		</div>
+    </div>
+  
+	<div class="container text-center" style="padding: 50px;">
+		<h3 id="creator" class="text-center" style="letter-spacing: 10px; color: #111;">Creator's Information</h3>  
+		<ul class="nav nav-tabs" style="margin: 50px;">
+			<li class="active"><a data-toggle="tab" href="#home">Angelique Etienne</a></li>
+			<li><a data-toggle="tab" href="#menu1">Johanna Xia</a></li>
+			<li><a data-toggle="tab" href="#menu2">Megan Wu</a></li>
+			<li><a data-toggle="tab" href="#menu3">Karen Chen</a></li>
+		</ul>
+		<div class="tab-content">
+			<div id="#home" class="tab-pane fade in active">
+				<h2>Angelique Etienne, Creator</h2>
+				<p style="margin: 30px;">I am really thankful to my group for developing this site. I think we put a lot of effort into this site and 
+				I believe many highschool and college students will being using this site to help them achieve greater things. </p>
+			</div>
+			<div id="#menu1" class="tab-pane fade">
+				<h2>Johanna Xia, Design/Code</h2>
+				<p style="margin: 30px;">The process of the codes were the hardest but a little challenge wouldn't stop me. We tried to design the 
+				website to look like the one we all planned out. We could only do a few add-ons. </p>
+			</div>
+			<div id="#menu2" class="tab-pane fade">
+				<h2>Megan Wu, Design/Code</h2>
+				<p style="margin: 30px;">We put a lot of effort into this site and we tried to have one template for all the sub pages, but I our original 
+				design didn't look like it. There was a lot of time that we didn't get the chance to meet up as a group and talk, 
+				but that didn't stop us from working.</p>
+			</div>
+			<div id="#menu3" class="tab-pane fade">
+				<h2>Karen Chen, Design/Code</h2>
+				<p style="margin: 30px;">Finding all the information online and put them into our site was also a difficult task because not all the 
+				information match. I need to try harder to have more people know about this website.</p>
+			</div>
+		</div>
+	</div>
+  
+	<footer class="text-center">
+		<a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP">
+			<span class="glyphicon glyphicon-chevron-up"></span>
+		</a><br><br>
+  
+		<div class="row">
+			<div class="col-sm-4">
+				<p><span class="glyphicon glyphicon-map-marker"></span>New York, US</p>
+			</div>
+			<div class="col-sm-4">
+				<p><span class="glyphicon glyphicon-phone"></span>Phone: +00 1515151515</p>
+			</div>
+			<div class="col-sm-4">
+				<p><span class="glyphicon glyphicon-envelope"></span>Email: CreativeMe@gmail.com</p>
+			</div>
+		</div>
+	</footer>
+
+	<script src="..\Other\functions.js"></script>
+</body>
+</html>
